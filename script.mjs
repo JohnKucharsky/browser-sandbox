@@ -1,0 +1,25 @@
+debugger;
+
+function pick(obj, keys) {
+  if (typeof keys === "string") {
+    return obj[keys] !== undefined ? { [keys]: obj[keys] } : {};
+  }
+
+  return (Array.isArray(keys) ? keys : []).reduce((result, key) => {
+    if (key in obj) {
+      result[key] = obj[key];
+    }
+    return result;
+  }, {});
+}
+
+const user = {
+  name: "Alice",
+  age: 25,
+  email: "alice@example.com",
+  city: "Wonderland",
+};
+
+const picked = pick(user, ["name", "email"]);
+console.log(picked);
+// { name: 'Alice', email: 'alice@example.com' }
